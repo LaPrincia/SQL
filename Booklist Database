@@ -1,0 +1,17 @@
+--Create a booklist database to compare rating of current best sellers on Amazon
+
+CREATE TABLE booklist (id INTEGER PRIMARY KEY, Book TEXT, Rating INTEGER);
+
+INSERT INTO book VALUES (1, "Things We Never Got Over", 4.3);
+INSERT INTO book VALUES (2, "The Do-Over", 4.5);
+INSERT INTO book VALUES (3, "Never Saw You Coming", 4.4);
+INSERT INTO book VALUES (3, "The Family Across the Street", 4.2);
+INSERT INTO book VALUES (3, "Alpha", 4.3);
+INSERT INTO book VALUES (3, "Lessons in Chemistry", 4.6);
+INSERT INTO book VALUES (3, "Things We Never Got Over", 4.5);
+INSERT INTO book VALUES (3, "The Boys from Biloxi A Legal Thriller", 4.4);
+INSERT INTO book VALUES (3, "The Book Spy", 4.7);
+
+--display the database ordered by rating. 
+SELECT * FROM book
+ORDER BY rating desc; 
