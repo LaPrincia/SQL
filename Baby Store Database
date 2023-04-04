@@ -1,0 +1,21 @@
+create table OhBaby(Id integer primary key, Item text, Price integer, Catagory text, " Stock Count" Integer, Aisle integer);
+
+insert into OhBaby values (1,"Socks", 5.99, "Apparel", 20, 7);
+insert into OhBaby values (2,"Onesie", 6.99, "Apparel", 42, 7);
+insert into ohbaby values (3, "Tops", 4.99, "Apparel", 36, 6);
+insert into ohbaby values (4, "Bottoms", 4.99, "Apparel", 39, 6);
+insert into ohbaby values (5, "Bottles", 10, "Feeding", 30, 4);
+insert into ohbaby values (6, "Formula", 19.99, "Feeding", 26, 4);
+insert into ohbaby values (7, "Diapers", 15, "Diapering", 50, 3);
+insert into ohbaby values (8, "Diaper Bags", 15, "Diapering", 20, 3);
+insert into ohbaby values (9, "Monitor", 79.99, "Nursery", 10, 8);
+insert into ohbaby values (10, "Bassinet", 8, "Nursery", 10, 9);
+insert into ohbaby values (11, "Crib Mobile", 60, "Nursery", 6, 8);
+insert into ohbaby values (12, "Car Seat", 120, "Large Necessities", 10, 10);
+insert into ohbaby values (13, "High seat",100 , "Large Necessities", 7, 10);
+insert into ohbaby values (14, "Stoller",150 , "Large Necessities", 5, 10);
+insert into ohbaby values (15, "Changing Station",150 , "Large Necessities", 5, 10);
+
+SELECT * FROM OhBaby order by price;
+
+SELECT SUM(price) from ohbaby;
