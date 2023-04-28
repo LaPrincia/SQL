@@ -1,0 +1,33 @@
+/**In this project, you’re going to make your own table with some small 
+set of “famous people”, then make more tables about things they do and join 
+those to create nice human readable lists. Contains at least two tables. One of the tables contains a column that relates to the primary key of another table.
+Has at least one query that does a JOIN.*/
+
+CREATE TABLE Female_Music_Artists
+   (id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name TEXT,
+    Age INTEGER,
+    Nationality TEXT);
+    
+INSERT INTO Female_Music_Artists (name, age, nationality) VALUES ("Beyonce", 41, "US");
+INSERT INTO Female_Music_Artists (name, age, nationality) VALUES ("Taylor Swifft", 33, "US");
+INSERT INTO Female_Music_Artists (name, age, nationality) VALUES ("Madonna", 64, "US");
+INSERT INTO Female_Music_Artists (name, age, nationality) VALUES ("Rihanna", 35, "Barbados");
+INSERT INTO Female_Music_Artists (name, age, nationality) VALUES ("Adele", 34, "London");
+
+CREATE table wealth (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Artists_id INTEGER,
+    net_worth TEXT,
+    genres TEXT);
+    
+INSERT INTO wealth (Artists_id, net_worth, genres) VALUES (1, "500 million", "R&B. POP");
+INSERT INTO wealth (Artists_id, net_worth, genres) VALUES (2, "570 million", "POP, Country");
+INSERT INTO wealth (Artists_id, net_worth, genres) VALUES (3, "850 million", "POP");
+INSERT INTO wealth (Artists_id, net_worth, genres) VALUES (4, "1.4 billion", "pop, R&B");
+INSERT INTO wealth (Artists_id, net_worth, genres) VALUES (5, "220 Million", "POP, Soul");
+
+SELECT Female_Music_Artists.name, wealth.genres
+FROM Female_Music_Artists
+JOIN wealth
+ON Female_Music_Artists.id= wealth.Artists_id
