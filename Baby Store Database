@@ -1,5 +1,5 @@
---For this project I created my own store. Doing this allowed me to showcase my ability to create tables and insert data.
---This project also displays my ability to rearrange data as well as data aggregation.
+/* For this project I created my own store. Doing this allowed me to showcase my ability to create tables and insert data.
+This project also displays my ability to rearrange data as well as data aggregation.*/
 
 
 create table OhBaby(Id integer primary key, Item text, Price integer, Catagory text, " Stock Count" Integer, Aisle integer);
