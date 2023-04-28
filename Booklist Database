@@ -1,4 +1,4 @@
---Create a booklist database to compare rating of current best sellers on Amazon
+/*Create a booklist database to compare rating of current best sellers on Amazon*/
 
 CREATE TABLE booklist (id INTEGER PRIMARY KEY, Book TEXT, Rating INTEGER);
 
