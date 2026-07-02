@@ -1,0 +1,17 @@
+SELECT
+
+    Contract_Category,Health_System_Entity_Code,Facility_Name,Transaction_Date,Manufacturer_Top_Parent_Name, Manufacturer_Catalog_Number,Product_Description,Packaging_String, UOM_Conv, Quantity,Quantity_in_EacheS, Base_Each_Price, Base_Spend,
+
+    -- Last price paid based on the most recent transaction
+FIRST_VALUE(Base_Each_Price) OVER (
+PARTITION BY Manufacturer_Top_Parent_Name, Manufacturer_Catalog_Number
+ORDER BY Transaction_Date DESC        ) AS Last_Base_Each_Price
+
+FROM ahp_bsmh_dp_supplycopia_uco.tbl_enriched_po
+WHERE Health_System_Entity_Code NOT IN ('NOT AVAILABLE')  -- remove invalid codes
+    AND Health_System_Entity_Code NOT LIKE '3%'           -- remove codes starting with 3 (roper)
+    AND Base_Spend <> 0                                   -- exclude zero spend transactions
+    AND Transaction_Date > '2025-05-01'                                
+    AND Manufacturer_Catalog_Number in ("ART0420", "ART0421")
+
+ 
