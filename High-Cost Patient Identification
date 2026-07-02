@@ -1,0 +1,17 @@
+WITH patient_costs AS (
+    SELECT
+        e.patient_id,
+        SUM(c.total_cost) AS total_cost
+    FROM encounters e
+    JOIN costs c
+        ON e.encounter_id = c.encounter_id
+    GROUP BY e.patient_id
+),
+ranked AS (
+    SELECT *,
+           NTILE(10) OVER (ORDER BY total_cost DESC) AS cost_decile
+    FROM patient_costs
+)
+SELECT *
+FROM ranked
+WHERE cost_decile = 1;
