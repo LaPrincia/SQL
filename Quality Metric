@@ -1,0 +1,22 @@
+WITH readmissions AS (
+    SELECT
+        patient_id,
+        encounter_id,
+        discharge_date,
+        LEAD(admission_date) OVER (
+            PARTITION BY patient_id
+            ORDER BY admission_date
+        ) AS next_admission_date
+    FROM encounters
+),
+flagged AS (
+    SELECT *,
+           CASE 
+               WHEN DATEDIFF(day, discharge_date, next_admission_date) <= 30
+               THEN 1 ELSE 0
+           END AS readmit_flag
+    FROM readmissions
+)
+SELECT
+    SUM(readmit_flag) * 1.0 / COUNT(*) AS readmission_rate
+FROM flagged;
