@@ -1,0 +1,13 @@
+SELECT
+    d.service_line,
+    DATE_TRUNC('month', e.encounter_date) AS month,
+    COUNT(e.encounter_id) AS volume,
+    SUM(c.total_cost) AS total_cost,
+    AVG(c.total_cost) AS avg_cost
+FROM encounters e
+JOIN diagnoses d
+    ON e.encounter_id = d.encounter_id
+JOIN costs c
+    ON e.encounter_id = c.encounter_id
+GROUP BY d.service_line, DATE_TRUNC('month', e.encounter_date)
+ORDER BY month;
