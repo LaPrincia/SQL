@@ -1,0 +1,11 @@
+SELECT
+    e.patient_id,
+    COUNT(DISTINCT e.encounter_id) AS total_visits,
+    MIN(e.encounter_date) AS first_visit_date,
+    MAX(e.encounter_date) AS last_visit_date,
+    SUM(c.total_cost) AS total_cost,
+    AVG(c.total_cost) AS avg_cost_per_visit
+FROM encounters e
+JOIN costs c
+    ON e.encounter_id = c.encounter_id
+GROUP BY e.patient_id;
