@@ -1,0 +1,29 @@
+--Ecri Bm
+ WITH RankedSupply AS (
+    SELECT  ManufacturerName,  ManufacturerCatalogNumber, Description, UOM, ConversionFactor, MemberInterest, NationalUsage, SupplyGuideLow,  (CAST(SupplyGuideLow AS DECIMAL(18,4)) + CAST(SupplyGuide25th AS DECIMAL(18,4))) / 2.0 AS SupplyGuide10,SupplyGuide25th, SupplyGuideMedian, SupplyGuide75th, (CAST(SupplyGuide75th AS DECIMAL(18,4)) + CAST(SupplyGuideHigh AS DECIMAL(18,4))) / 2.0 AS SupplyGuide90, SupplyGuideHigh,
+
+-- highest MemberInterest per SKU/Manufacturer
+        ROW_NUMBER() OVER (
+            PARTITION BY ManufacturerName, ManufacturerCatalogNumber
+            ORDER BY MemberInterest DESC
+) AS member_rank
+FROM ahp_bsmh_enriched_ecri_refined.tbl_supply_guide_data
+),
+
+  -- highest Usage From Hightest MemberInterest per SKU/Manufacturer
+
+TopNationalUsage AS (
+    SELECT *,
+        ROW_NUMBER() OVER (
+            PARTITION BY ManufacturerName, ManufacturerCatalogNumber
+            ORDER BY NationalUsage DESC
+) AS usage_rank
+FROM RankedSupply
+WHERE member_rank = 1
+)
+SELECT *
+FROM TopNationalUsage
+WHERE usage_rank = 1
+AND ManufacturerCatalogNumber IN ("ART0420", "ART0421", "ART0422")
+
+ 
